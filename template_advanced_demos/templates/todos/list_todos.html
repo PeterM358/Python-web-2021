@@ -1,0 +1,10 @@
+{% extends 'shared/base.html' %}
+{% block head_title %}List todos{% endblock %}
+
+{% block content %}
+<ul>
+    {% for todo in todos %}
+        <li>{{ todo.text }} {{ todo.is_done }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
