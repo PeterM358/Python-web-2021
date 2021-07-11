@@ -1,0 +1,12 @@
+.list {
+    list-style-type: none;
+}
+.list > *{
+    padding: 0px;
+    margin: 5px 0 0;
+    color: blue;
+}
+
+.list img {
+    height: 50px;
+}
