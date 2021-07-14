@@ -37,11 +37,13 @@ class Pet(models.Model):
         null=False,
         blank=False,
     )
-    image_url = models.URLField(
-        null=False,
-        blank=False,
+    # image_url = models.URLField(
+    #     null=False,
+    #     blank=False,
+    # )
+    image = models.ImageField(
+        upload_to='pets',
     )
-
 
 class Like(models.Model):
     pet = models.ForeignKey(
