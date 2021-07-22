@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from petstagram.common.forms import CommentForm
@@ -39,19 +40,28 @@ def comment_pet(request, pk):
 
 
 def like_pet(request, pk):
-    pet_to_like = Pet.objects.get(pk=pk)
-    like = Like(
-        pet=pet_to_like,
-    )
-    like.save()
-    return redirect('pet details', pet_to_like.id)
+    pet = Pet.objects.get(pk=pk)
+    like_object_by_user = pet.like_set.filter(user_id=request.user.id).first()
+
+    if like_object_by_user:
+        like_object_by_user.delete()
+    else:
+        like = Like(
+            pet=pet,
+            user=request.user,
+        )
+        like.save()
+    return redirect('pet details', pet.id)
 
 
+@login_required
 def create_pet(request):
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            pet = form.save(commit=False)
+            pet.user = request.user
+            pet.save()
             return redirect('list pets')
     else:
         form = PetForm()

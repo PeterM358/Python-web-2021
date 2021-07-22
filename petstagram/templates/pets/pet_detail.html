@@ -10,6 +10,7 @@
                 <h5><u>Type:</u> {{ pet.type }}</h5>
                 <h5><u>Name:</u> {{ pet.name }}</h5>
                 <h5><u>Age:</u> {{ pet.age }}</h5>
+                <h5><u>Owner:</u> {{ request.user.email }}</h5>
             </div>
             <p class="mt-2">Description: {{ pet.description }}</p>
             <div>

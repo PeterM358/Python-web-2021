@@ -7,7 +7,8 @@ from petstagram.pets.models import Pet
 class PetForm(BootstrapFormMixin, forms.ModelForm):
     class Meta:
         model = Pet
-        fields = '__all__'  # without these two pops error
+        exclude = ('user', )
+        # fields = '__all__'  # without these two pops error
 
 
 class EditPetForm(PetForm):
